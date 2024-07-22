@@ -24,6 +24,10 @@ private slots:
 
     void on_color_clicked();
 
+    double luminance(int r, int g, int b);
+    double contrastRatio(double luminance1, double luminance2);
+    QString calculate_TextColor(int r, int g, int b);
+
 private:
     Ui::MainWindow *ui;
     QString widget_background_rgb;
