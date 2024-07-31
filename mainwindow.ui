@@ -37,10 +37,10 @@
    <widget class="QPushButton" name="time_button">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>130</x>
       <y>140</y>
       <width>83</width>
-      <height>29</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -96,7 +96,7 @@
      <string/>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="total">
     <property name="geometry">
      <rect>
       <x>652</x>
@@ -106,7 +106,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="total_last_month">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -145,7 +145,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_3">
+   <widget class="QLineEdit" name="moneybox">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -187,7 +187,7 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
+   <widget class="QLineEdit" name="parents">
     <property name="geometry">
      <rect>
       <x>650</x>
@@ -195,6 +195,32 @@
       <width>113</width>
       <height>28</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="next_month">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>140</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="prev_month">
+    <property name="geometry">
+     <rect>
+      <x>100</x>
+      <y>140</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>&lt;</string>
     </property>
    </widget>
   </widget>

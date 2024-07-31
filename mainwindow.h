@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "jsonhandler.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +15,7 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    json_return json_data;
 
 
 private slots:
@@ -27,6 +29,12 @@ private slots:
     double luminance(int r, int g, int b);
     double contrastRatio(double luminance1, double luminance2);
     QString calculate_TextColor(int r, int g, int b);
+
+    void on_write_to_file_clicked();
+
+    void on_next_month_clicked();
+
+    void on_prev_month_clicked();
 
 private:
     Ui::MainWindow *ui;

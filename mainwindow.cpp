@@ -5,10 +5,8 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include <QRandomGenerator>
-#include "jsonhandler.h"
+#include <QMessageBox>
 // ToDO:
-// Запись в файл предыдущих месяцев
-// Чтение с файла
 // Кнопки + и -
 // Рассчет остатка с предыдущего месяца
 // Подгрузка всех средств
@@ -30,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
         "margin: 0;"
         "border: 0;"
         "padding: 0;");
-    json_return json_data = JsonHandler::readJson();
+    json_data = JsonHandler::readJson();
     for(int i = 0; i < json_data.map.length(); i++)
     {
         QHBoxLayout* mainlayout = new QHBoxLayout();
@@ -50,6 +48,10 @@ MainWindow::MainWindow(QWidget *parent)
             );
         ui->listWidget->setItemWidget(item, widget);
     }
+    ui->moneybox->setText(QString::number(json_data.moneybox));
+    ui->total_last_month->setText(QString::number(json_data.total_last_month));
+    ui->parents->setText(QString::number(json_data.parents));
+    ui->total->setText(QString::number(json_data.total));
 }
 
 MainWindow::~MainWindow()
@@ -99,9 +101,9 @@ void MainWindow::on_add_button_clicked()
     QHBoxLayout* mainlayout = new QHBoxLayout();
     QLabel* cur_income = new QLabel(ui->cur_income->text());
     QLabel* cur_month = new QLabel(ui->time_line->text());
-    mainlayout->addWidget(cur_income);
-    mainlayout->addStretch();
     mainlayout->addWidget(cur_month);
+    mainlayout->addStretch();
+    mainlayout->addWidget(cur_income);
 
     QListWidgetItem* item = new QListWidgetItem(ui->listWidget);
     QWidget* widget = new QWidget();
@@ -112,6 +114,22 @@ void MainWindow::on_add_button_clicked()
         "color: " + calculate_TextColor(widget_r.toInt(), widget_g.toInt(), widget_b.toInt())
         );
     ui->listWidget->setItemWidget(item, widget);
+    int cur_month_int = 0;
+    for(int i = 0; i < months.length(); i++)
+    {
+        if(months[i] == ui->time_line->text())
+        {
+            cur_month_int = i+1;
+            break;
+        }
+    }
+    QMap<QString, int> new_note;
+    new_note["month"] = cur_month_int;
+    new_note["month_total"] = ui->cur_income->text().toInt();
+    new_note["r"] = widget_r.toInt();
+    new_note["g"] = widget_g.toInt();
+    new_note["b"] = widget_b.toInt();
+    json_data.map.append(new_note);
 }
 
 // При нажатии кнопки цвета
@@ -128,7 +146,24 @@ void MainWindow::on_color_clicked()
         "padding: 0;");
 }
 
+void MainWindow::on_write_to_file_clicked()
+{
+    json_data.moneybox = ui->moneybox->text().toInt();
+    json_data.parents = ui->parents->text().toInt();
+    json_data.total = ui->total->text().toInt();
+    json_data.total_last_month = ui->total_last_month->text().toInt();
+    JsonHandler::write_json(json_data);
+}
 
 
+void MainWindow::on_next_month_clicked()
+{
+    // переключение на следующий месяц
+}
 
+
+void MainWindow::on_prev_month_clicked()
+{
+    // переключение на предыдущий месяц
+}
 
